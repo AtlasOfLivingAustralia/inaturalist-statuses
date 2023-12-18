@@ -1,4 +1,4 @@
-# iNaturalist taxon status updates
+# iNaturalist Australia - taxon status updates
 
 Taxa in iNaturalist have statuses and obfuscation levels that can be set for regions that the ALA is responsible for maintaining in Australia. Bulk loads can be submitted to iNaturalist in December/January using these [templates and checklists](https://docs.google.com/spreadsheets/d/1yTwWh4d-lHeaBGCB9m70-HKEMtvrquHsPu3Zrgz9BcE/edit#gid=1531097917)
 
@@ -11,4 +11,4 @@ Current statuses per iNaturalist taxonID are available in the iNaturalist site e
    * **new** - any new species that appear in the state lists but do not have a status in inaturalist (ADD)
    * **updates** - any changes to statuses (update template, action='UPDATE')
    * **removals** - any statuses which were added by us previously (user_id = 708886) list which are incorrect (update template, action='REMOVE')
-   * **flags** - are there any statuses by other users that need to be flagged?
+   * **flags** - check for statuses by other users that need to be flagged
