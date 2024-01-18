@@ -1,6 +1,6 @@
 #%%
-# Common functions for Authoritative Lists
-#
+# Common functions for conservation and sensitive lists
+
 import pandas as pd
 import urllib.request
 import json
@@ -10,7 +10,7 @@ import requests
 import datetime
 
 def download_ala_specieslist(url: str):
-    print("download_ala_list: ", url)
+    #print("download_ala_list: ", url)
     with urllib.request.urlopen(url, context=ssl.create_default_context(cafile=certifi.where())) as url:
         if url.status == 200:
             data = json.loads(url.read().decode())
@@ -21,7 +21,7 @@ def download_ala_specieslist(url: str):
     return data
 
 def kvp_to_columns(df):
-    print(df.columns)
+    #print(df.columns)
     d0 = pd.DataFrame()
     for i in df.index:
         if len(df['kvpValues'][i]) > 0:
@@ -32,15 +32,16 @@ def kvp_to_columns(df):
             kvpdf['id'] = df.id[i]
             kvpdf = pd.merge(df, kvpdf, "inner", on="id")
             d0 = pd.concat([d0, kvpdf])
+            d0 = d0.drop('kvpValues',axis=1)
     return d0
 
 def build_list_url(drstr: str):
-    print("build_list_url: ", drstr)
+    #print("build_list_url: ", drstr)
     url = "https://lists.ala.org.au/ws/speciesListItems/" + drstr + "?max=10000&includeKVP=true"
     return url
 
 def get_changelist(testdr: str, proddr: str, ltype: str):
-    print("get_changelist: Test - ", testdr, "Prod - ", proddr)
+    #print("get_changelist: Test - ", testdr, "Prod - ", proddr)
     oldListPref = "https://lists.ala.org.au/ws/speciesListItems/"
     newListPref = "https://lists-test.ala.org.au/ws/speciesListItems/"
     urlSuffix = "?max=10000&includeKVP=true"
@@ -128,7 +129,7 @@ def map_status(state, fname, dframe):
 # list_information_report functions
 
 def get_listDataframe(listurl:str):
-    print("get_listDataframe: ", listurl)
+    #print("get_listDataframe: ", listurl)
     limit = 1000
     offset = 0
     fulldf = pd.DataFrame()
@@ -154,7 +155,7 @@ def get_listDataframe(listurl:str):
 
 
 def filterDataframe(fulldf, filter_dict):
-    print('filterDataframe')
+    #print('filterDataframe')
     # Create a boolean mask based on the key-value pair
     # drvals = filter_dict.values()
     filtered_df = fulldf[fulldf['dataResourceUid'].isin(filter_dict.values())]
