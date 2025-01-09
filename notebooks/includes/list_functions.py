@@ -32,7 +32,7 @@ def kvp_to_columns(df):
             kvpdf['id'] = df.id[i]
             kvpdf = pd.merge(df, kvpdf, "inner", on="id")
             d0 = pd.concat([d0, kvpdf])
-            d0 = d0.drop('kvpValues',axis=1)
+            #d0 = d0.drop('kvpValues',axis=1) #some lists have an existing kvpValues field that causes confusion
     return d0
 
 def build_list_url(drstr: str):
